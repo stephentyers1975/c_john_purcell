@@ -1,0 +1,31 @@
+# Compiled C objects and libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+
+a.out
+
+# Build and output directories
+build/
+bin/
+Debug/
+Release/
+
+# Core dumps and logs
+core
+*.log
+
+# Editor and OS junk
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
