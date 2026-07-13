@@ -2,7 +2,7 @@
 
 This repository contains my course notes, exercises, and practice programs from my C programming learning journey. I am using the excellent Mastering C programming course by John Purcell.
 
-[Mastering C](https://example.com](https://www.caveofprogramming.com/products/courses/c-for-programmers-in-other-languages)
+https://www.caveofprogramming.com/products/courses/c-for-programmers-in-other-languages
 
 ## What is in here?
 
