@@ -1,6 +1,8 @@
 # C Language Learning Journey
 
-This repository contains my course notes, exercises, and practice programs from my C programming learning journey.
+This repository contains my course notes, exercises, and practice programs from my C programming learning journey. I am using the excellent Mastering C programming course by John Purcell.
+
+https://www.caveofprogramming.com/products/courses/c-for-programmers-in-other-languages
 
 ## What is in here?
 
