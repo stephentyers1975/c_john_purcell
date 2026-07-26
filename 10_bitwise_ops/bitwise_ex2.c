@@ -26,6 +26,8 @@ Bonus implement the functions again using unions, not bitshifting
 #include <stdint.h>
 #include <stdlib.h>
 
+// type punning
+
 typedef union 
 {
     uint32_t pattern;
@@ -35,6 +37,7 @@ typedef union
         uint8_t g;
         uint8_t r;
     } pixel;
+
 } rgb_pixel;
 
 
