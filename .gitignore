@@ -8,6 +8,14 @@
 *.dll
 *.exe
 *.out
+*.gch
+*.gcda
+*.gcno
+*.ilk
+*.pdb
+*.exp
+*.i
+*.s
 
 a.out
 
@@ -16,6 +24,15 @@ build/
 bin/
 Debug/
 Release/
+.vs/
+.cache/
+compile_commands.json
+
+# Debugging and temporary artifacts
+*.stackdump
+*.dSYM/
+*.tmp
+*.temp
 
 # Core dumps and logs
 core
