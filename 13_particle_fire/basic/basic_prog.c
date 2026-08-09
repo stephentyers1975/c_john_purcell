@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, NULL);
 
     if (renderer == NULL) 
 	{
