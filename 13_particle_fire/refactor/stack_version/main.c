@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include "refactor.h"
 
 /*
  * Present a window filled with green.
@@ -29,3 +30,12 @@
  * to ensure they don't conflict with any other function.
  * E.g. gs_
  */
+
+ int main() {
+    
+    sdl_t app = create_app(800, 600, "SDL Test");
+    event_loop(app);
+    destroy_app(app);
+
+    return 0;
+ }
