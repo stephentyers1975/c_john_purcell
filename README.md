@@ -17,6 +17,9 @@ The files are organized by topic as I progressed through different areas of C:
 - 8_standardfunc - examples using the C standard library
 - 9_filehandling - reading and writing files, including binary file examples
 - 10_bitwise_ops - bitwise operators and bit shifting exercises
+- 11_preprocessor - preprocessor directives, macros, and conditional compilation examples
+- 12_error_handling - error handling examples using `assert` and `perror`
+- 13_particle_fire - SDL-based particle/fire demo and refactor examples
 
 ## Purpose
 
@@ -37,6 +40,18 @@ For example:
 cd 9_filehandling
 gcc -Wall -std=c23 -o file_ex file_ex.c
 ./file_ex
+
+Particle fire (SDL3 example):
+
+```bash
+cd 13_particle_fire/refactor/johns_solution
+gcc -Wall -std=c23 -Iinclude -o main main.c graphics.c -lSDL3
+./main
+```
+
+Notes:
+- The particle demo uses SDL3. Install the SDL3 development libraries (for example `libSDL3-dev` on Debian/Ubuntu) before building.
+- The `include/` path is used for local headers in the example build command above.
 ```
 
 ## Notes
