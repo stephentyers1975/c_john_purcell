@@ -93,9 +93,9 @@ uint32_t hsl_to_rgb(double hue, double sat, double light)
     g1 += m;
     b1 += m;
 
+    // scale result to 0 - 255 for RGB values
     uint32_t result = RGB((int)lround(r1 * 255), (int)lround(g1 * 255), (int)lround(b1 * 255));
-    printf("Red: %f, Green: %f, Blue: %f\n", r1, g1, b1);
-
+   
     return result;
 }
 
