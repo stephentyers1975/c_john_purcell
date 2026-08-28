@@ -24,7 +24,7 @@
 int main(int argc, char** argv)
 {
     // Call the hsl_to_rgb test function.
-    hsl_test();
+    // hsl_test();
 
     const int width = 800;
     const int height = 600;
