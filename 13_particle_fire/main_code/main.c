@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "include/graphics.h"
-#include "include/hslrgb.h"
+#include "include/swarm.h"
 /*
  * Note: in graphics.h, I've added macros RGB, R, G and B for converting
  * between separate RGB values and a combined RGB value.
@@ -28,19 +28,17 @@ int main(int argc, char** argv)
 
     const int width = 800;
     const int height = 600;
+    const int nparticles = 1000;
 
     gs_graphics *g = gs_init_graphics("Particle Fire", width, height);
+    particle_t *swarm = swarm_create(nparticles);
 
-    for(int y=0; y<height; ++y)
-    {
-        for(int x=0; x<width; ++x)
-        {
-            // Note: using "|" to add alpha value.
-            g->buffer[y * width + x] = 0xFF000000 | hsl_to_rgb((double)y/height, 1, 0.5);
-        }
+    while(gs_poll_events(g)){
+        swarm_draw(swarm, g , nparticles);
+        gs_draw(g);
     }
-    
-    gs_event_loop(g);
+
     gs_dispose_graphics(g);
+    swarm_dispose(swarm);
     return 0;
 }

@@ -21,6 +21,8 @@ typedef struct
 gs_graphics *gs_init_graphics(char title[], int width, int height);
 bool gs_event_loop(gs_graphics *g);
 void gs_dispose_graphics(gs_graphics *g);
+bool gs_draw(gs_graphics *g);
+bool gs_poll_events(gs_graphics *g);
 
 
 #endif

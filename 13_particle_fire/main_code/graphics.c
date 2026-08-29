@@ -94,6 +94,34 @@ bool gs_event_loop(gs_graphics *g)
     return true;
 }
 
+bool gs_draw(gs_graphics *g){
+    // draw on the screen
+
+    if(SDL_UpdateTexture(g->texture, NULL, g->buffer, g->width * 4) == false) {
+        printf("Error updating texture: %s\n", SDL_GetError());
+        return false;
+    }
+
+    SDL_RenderClear(g->renderer);
+    SDL_RenderTexture(g->renderer, g->texture, NULL, NULL);
+    SDL_RenderPresent(g->renderer);
+
+    SDL_Delay(2);
+}
+
+bool gs_poll_events(gs_graphics *g){
+    SDL_Event event;
+    while(SDL_PollEvent(&event)){
+        if (event.type == SDL_EVENT_QUIT){
+            return false;
+        }
+        else if (event.type == SDL_EVENT_KEY_UP && event.key.key == SDLK_ESCAPE) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void gs_dispose_graphics(gs_graphics *g)
 {
     /*

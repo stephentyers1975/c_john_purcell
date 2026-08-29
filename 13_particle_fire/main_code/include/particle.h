@@ -5,6 +5,9 @@ typedef struct
 {   
     double x;
     double y;
+    double speed;
+    double angular_speed;
+    double direction;
 } particle_t;
 
 void particle_init(particle_t *p);
