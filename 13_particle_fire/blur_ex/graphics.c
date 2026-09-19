@@ -118,70 +118,75 @@ static void horizontal_blur(uint32_t *input, uint32_t *output, int width, int he
         for(int x=0; x<width; ++x)
         {
             int index = y * width + x;
-            if (index == 0) {
-                red_sum += (RED(input[index]) + RED(input[index + 1])) / 2;
-                green_sum += (GREEN(input[index]) + GREEN(input[index + 1])) / 2;
-                blue_sum += (BLUE(input[index]) + BLUE(input[index + 1])) / 2;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
+            if (x == 0) {
+                red_sum += (RED(input[index]) + RED(input[index + 1]));
+                green_sum += (GREEN(input[index]) + GREEN(input[index + 1]));
+                blue_sum += (BLUE(input[index]) + BLUE(input[index + 1]));
+                output[index] = RGB(red_sum / 2, green_sum / 2, blue_sum / 2);
             }
-            else if (index == index + width - 2) {
-                red_sum += (RED(input[index + 1]) - RED(output[y * width])) / 3;
-                green_sum += (GREEN(input[index + 1]) - GREEN(output[y * width])) / 3;
-                blue_sum += (BLUE(input[index + 1]) - BLUE(output[y * width])) / 3;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
+            else if (x == 1) {
+                red_sum += RED(input[index + 1]);
+                green_sum += GREEN(input[index + 1]);
+                blue_sum += BLUE(input[index + 1]);
+                output[index] = RGB(red_sum / 3, green_sum / 3, blue_sum / 3);
             }
-            else if (index == index + width - 1) {
-                red_sum += (RED(input[index]) - RED(input[index - 2])) / 2;
-                green_sum += (GREEN(input[index]) - GREEN(input[index - 2])) / 2;
-                blue_sum += (BLUE(input[index + 1]) - BLUE(input[index - 2])) / 2;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
+            else if (x == width - 1) {
+                red_sum -= RED(input[index - 2]);
+                green_sum -= GREEN(input[index - 2]);
+                blue_sum -= BLUE(input[index - 2]);
+                output[index] = RGB(red_sum / 2, green_sum / 2, blue_sum / 2);
             }
             else {
-                red_sum += RED(input[index + 1]) / 3;
-                green_sum += GREEN(input[index + 1]) / 3;
-                blue_sum += BLUE(input[index + 1]) / 3;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
+                red_sum += (RED(input[index + 1]) - RED(input[index - 2]));
+                green_sum += (GREEN(input[index + 1]) - GREEN(input[index - 2]));
+                blue_sum += (BLUE(input[index + 1]) - BLUE(input[index - 2]));
+                output[index] = RGB(red_sum / 3, green_sum / 3, blue_sum / 3);
             }
         }
     }
 }
 
 
+
 static void vertical_blur(uint32_t *input, uint32_t *output, int width, int height)
 {
    // Note: read from input and write to output.
-    for (int x = 0; x < width; x++) {
-        uint32_t red_sum = 0;
-        uint32_t green_sum = 0;
-        uint32_t blue_sum = 0;
-        for (int y = 0; y < height; y++) {
-            int index = y * width + x;
-            if (index == 0) {
-                red_sum += (RED(input[index]) + RED(input[index + 1])) / 2;
-                green_sum += (GREEN(input[index]) + GREEN(input[index + 1])) / 2;
-                blue_sum += (BLUE(input[index]) + BLUE(input[index + 1])) / 2;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
+        for (int x = 0; x < width; x++) {
+        // Inner loop goes down the rows (y)
+            uint32_t red_sum = 0;
+            uint32_t green_sum = 0;
+            uint32_t blue_sum = 0;
+            for (int y = 0; y < height; y++) {
+                
+                int index = y * width + x;
+                if (y == 0) {
+                    red_sum += (RED(input[index]) + RED(input[index + width]));
+                    green_sum += (GREEN(input[index]) + GREEN(input[index + width]));
+                    blue_sum += (BLUE(input[index]) + BLUE(input[index + width]));
+                    output[index] = RGB(red_sum / 2, green_sum / 2, blue_sum / 2);
+                }
+                else if (y == 1) {
+                    red_sum += RED(input[index + width]);
+                    green_sum += GREEN(input[index + width]);
+                    blue_sum += BLUE(input[index + width]);
+                    output[index] = RGB(red_sum / 3, green_sum / 3, blue_sum / 3);
+                }   
+                else if (y == height - 1) {
+                    red_sum -= RED(input[index - (2 * width)]);
+                    green_sum -= GREEN(input[index - (2 * width)]);
+                    blue_sum -= BLUE(input[index - (2 * width)]);
+                    output[index] = RGB(red_sum / 2, green_sum / 2, blue_sum / 2);
+                }
+                else {
+                    red_sum += (RED(input[index + width]) - RED(input[index - (2 * width)]));
+                    green_sum += (GREEN(input[index + width]) - GREEN(input[index - (2 * width)]));
+                    blue_sum += (BLUE(input[index + width]) - BLUE(input[index - (2 * width)]));
+                    output[index] = RGB(red_sum / 3, green_sum / 3, blue_sum / 3);
+                }
             }
-            else if (index == index + width - 2) {
-                red_sum += (RED(input[index + 1]) - RED(output[y * width])) / 3;
-                green_sum += (GREEN(input[index + 1]) - GREEN(output[y * width])) / 3;
-                blue_sum += (BLUE(input[index + 1]) - BLUE(output[y * width])) / 3;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
-            }
-            else if (index == index + width - 1) {
-                red_sum += (RED(input[index]) - RED(input[index - 2])) / 2;
-                green_sum += (GREEN(input[index]) - GREEN(input[index - 2])) / 2;
-                blue_sum += (BLUE(input[index + 1]) - BLUE(input[index - 2])) / 2;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
-            }
-            else {
-                red_sum += RED(input[index + 1]) / 3;
-                green_sum += GREEN(input[index + 1]) / 3;
-                blue_sum += BLUE(input[index + 1]) / 3;
-                output[index] = RGB(red_sum, green_sum, blue_sum);
-            }
+        
         }
-    }
+    
 }
 
 gs_graphics *gs_init_graphics(char title[], int width, int height)
