@@ -11,8 +11,8 @@ void particle_init(particle_t *p)
     // and sides of 1 unit.
     p->x = 0;
     p->y = 0;
-    p->speed = 0.0001 * rand() / RAND_MAX;
-    p->angular_speed = 0.001 * rand() / RAND_MAX;
+    p->speed = 0.0001 + 0.001 * rand() / RAND_MAX;
+    p->angular_speed = 0.006 * rand() / RAND_MAX;
     p->direction = 2 * PI * rand() / RAND_MAX;
 }
 
@@ -20,6 +20,11 @@ void particle_update(particle_t *p)
 {
     p->x += cos(p->direction) * p->speed;
     p->y += sin(p->direction) * p->speed;
+
+    // if (p->x*p->x + p->y*p->y > 1){
+    //     p->x = 0;
+    //     p->y = 0;
+    // }
 
     p->direction += p->angular_speed;
 }
